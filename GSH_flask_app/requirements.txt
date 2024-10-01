@@ -1,0 +1,6 @@
+pyserial
+time
+requests
+json
+flask
+jinja2

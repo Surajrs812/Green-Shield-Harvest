@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry Pi View</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header Section -->
+    <header class="bg-blue-900 text-white py-6 shadow-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Raspberry Pi Camera View</h1>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container mx-auto py-8 flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-4">
+
+        <!-- Live Camera Feed Section -->
+        <section class="w-full md:w-3/4 p-4 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold mb-4">Live Camera Feed</h2>
+            <!-- Raspberry Pi Camera Feed in a smaller rectangular window -->
+            <div class="border rounded-lg overflow-hidden">
+                <img src="http://raspberrypi.local:8080/stream" alt="Raspberry Pi Camera Feed" class="w-full h-64 object-cover">
+            </div>
+        </section>
+
+        <!-- Sidebar for JSON data -->
+        <aside class="w-full md:w-1/4 p-4 bg-white shadow-lg border-l border-gray-200 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">Device Status</h3>
+            <!-- JSON data will be loaded here dynamically -->
+            <div id="json-output" class="bg-gray-50 p-4 rounded-lg border border-gray-300" hx-get="/get_device_status" hx-trigger="load" hx-swap="innerHTML">
+                <!-- Loading spinner -->
+                <div class="text-center text-gray-500">
+                    <svg class="animate-spin h-5 w-5 mr-3 text-gray-600 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0116 0h2a10 10 0 10-10 10V12z"></path>
+                    </svg>
+                    Loading device status...
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Custom script to handle JSON response and populate it -->
+    <script>
+        document.addEventListener('htmx:afterRequest', function(event) {
+            if (event.detail.target.id === 'json-output') {
+                const jsonOutput = document.getElementById('json-output');
+                
+                // Clear existing content
+                jsonOutput.innerHTML = '';
+
+                try {
+                    const data = JSON.parse(event.detail.xhr.responseText);
+
+                    // Check if data is available
+                    if (Object.keys(data).length === 0) {
+                        jsonOutput.innerHTML = '<p class="text-gray-500 text-center">No data available</p>';
+                        return;
+                    }
+
+                    // Create an unordered list to hold the key-value pairs
+                    const ul = document.createElement('ul');
+                    ul.classList.add('space-y-2');  // Adding spacing between rows
+
+                    for (const [key, value] of Object.entries(data)) {
+                        const li = document.createElement('li');
+                        li.classList.add('bg-white', 'p-2', 'rounded-lg', 'shadow-md', 'border');  // Styling each row
+                        li.textContent = `${key}: ${value}`;
+                        ul.appendChild(li);
+                    }
+
+                    // Append the list to the json-output div
+                    jsonOutput.appendChild(ul);
+                } catch (error) {
+                    jsonOutput.innerHTML = '<p class="text-red-500 text-center">Error loading data</p>';
+                    console.error('Error parsing JSON data:', error);
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

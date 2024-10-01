@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undergraduate Research Forum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-relaxed tracking-wide flex flex-col justify-center items-center">
+
+    <!-- Header -->
+    <header class="bg-blue-900 text-white py-6 shadow-lg w-full">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold">RNS Institute of Technology</h1>
+            <h2 class="text-2xl font-medium mt-2">Undergraduate Research Forum</h2>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="flex-grow flex flex-col items-center justify-center p-8 text-center">
+        <!-- Project Title -->
+        <h2 class="text-6xl text-green-600 font-extrabold mb-4" style="font-family: Consolas;">Green Shield Harvest</h2>
+        
+        <!-- Project Description -->
+        <p class="text-lg text-gray-800 max-w-2xl text-center mb-6">
+            This project harnesses the power of IoT and Deep Learning to revolutionize hydroponic agriculture. 
+            By automating all tasks typically done by a farmer, this system ensures an efficient and sustainable
+            process, optimizing plant growth and maximizing output. The system also generates a dataset of images 
+            to analyze plant health over time, contributing to the research on smart farming.
+        </p>
+        
+        <!-- Guide Section -->
+        <div class="text-center mb-8">
+            <img src="static\Dr_Ambore.jpg" alt="Guide" class="rounded-full mx-auto mb-4 shadow-lg">
+            <p class="text-xl font-bold">Guide:</p>
+            <p class="text-xl font-medium">Bhagyashree Ambore</p>
+            <p class="text-gray-600">Associate Professor, Dept of ISE</p>
+        </div>
+
+        <!-- Students Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-center mb-8">
+            <div>
+                <img src="https://via.placeholder.com/150" alt="Student 1" class="rounded-full mx-auto mb-4 shadow-lg">
+                <p class="text-xl font-medium">Suraj R S</p>
+                <p class="text-gray-600">1RN21IS167</p>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/150" alt="Student 2" class="rounded-full mx-auto mb-4 shadow-lg">
+                <p class="text-xl font-medium">Srihari M</p>
+                <p class="text-gray-600">1RN21IS152</p>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/150" alt="Student 3" class="rounded-full mx-auto mb-4 shadow-lg">
+                <p class="text-xl font-medium">Tejas S</p>
+                <p class="text-gray-600">1RN21IS170</p>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <a href="{{ url_for('pi_view') }}" class="text-white bg-green-600 hover:bg-green-700 font-medium py-3 px-6 rounded-lg shadow-lg transition duration-300">
+            Explore Raspberry Pi View
+        </a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4 w-full">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 RNS Institute of Technology. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
