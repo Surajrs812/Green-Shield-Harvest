@@ -2,9 +2,10 @@ import requests
 import serial
 import time
 import json
+import os
 
 # OpenWeather API section
-API_KEY = "91c92360e208de9e42487a58a9e41766"  # Replace with your actual API key
+API_KEY = os.environ.get("WEATHER_API_KEY") 
 location = "Bengaluru"
 
 # OpenWeather API endpoint for current weather data
