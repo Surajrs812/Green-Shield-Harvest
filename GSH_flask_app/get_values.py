@@ -32,35 +32,42 @@ def get_weather_data():
 
 def get_arduino_data(arduino_port='COM4', baud_rate=9600):
     """Read sensor data from Arduino and return the status of sensor 1 and sensor 2."""
-    # Try to initialize the connection to the Arduino
+    c = 0
     try:
         ser = serial.Serial(arduino_port, baud_rate, timeout=1)
         print(f"Successfully connected to {arduino_port}")
-        serial_available = True
     except serial.SerialException as e:
         print(f"Error connecting to {arduino_port}: {e}")
-        ser = None  # Mark as None if the connection fails
-        serial_available = False  # Mark that serial is not available
+        return "NA", "NA"  # Return NA for both sensor statuses
 
-    def read_arduino_data():
-        try:
-            if ser and ser.in_waiting > 0:
-                # Read a line from the serial output
-                line = ser.readline().decode('utf-8').strip()
-                return line
-        except Exception as e:
-            print(f"Error reading data: {e}")
-        return None
+    sensor1_status = "NA"
+    sensor2_status = "NA"
+    start_time = time.time()
 
-    if not serial_available:
-        # If COM4 is not accessible, return 'NA' for moisture sensor statuses
-        sensor1_status = "NA"
-        sensor2_status = "NA"
-    else:
-        # If COM4 is accessible, read status data from Arduino
-        sensor1_status = read_arduino_data() or "NA"  # Default to 'NA' if no data
-        sensor2_status = read_arduino_data() or "NA"  # Default to 'NA' if no data
+    # Give some time for Arduino to start sending data
+    time.sleep(2)
 
+    while True:
+        if ser.in_waiting > 0:
+            line = ser.readline().decode('utf-8').strip()
+            print(f"Raw data from Arduino: {line}")  # Debug print to see raw input
+            if c == 0:
+                sensor1_status = line
+            elif c == 1:
+                sensor2_status = line
+            elif c == 2:
+                continue
+            elif c == 3:
+                continue
+            c += 1
+            # Expecting the format: "Some Moisture, No Moisture"
+                
+        # Break after a certain time
+        if time.time() - start_time > 5:
+            break
+
+    ser.close()
+    print(sensor1_status, sensor2_status)  # Close the serial connection after reading
     return sensor1_status, sensor2_status
 
 def get_device_status():
@@ -74,17 +81,18 @@ def get_device_status():
     # Format the final JSON response with sensor statuses and weather data
     data = {
         "Status": "ON",
-        "Moisture Sensor 1": sensor1_status,  # Moisture sensor 1 status
-        "Moisture Sensor 2": sensor2_status,  # Moisture sensor 2 status
-        "Temperature": temperature,  # Temperature from OpenWeather API
-        "Humidity": humidity,  # Humidity from OpenWeather API
+        "Moisture Sensor 1": sensor1_status,  # Status from Arduino for sensor 1
+        "Moisture Sensor 2": sensor2_status,  # Status from Arduino for sensor 2
+        "Temperature": temperature,            # Temperature from OpenWeather API
+        "Humidity": humidity,                  # Humidity from OpenWeather API
     }
+    
     filename = 'device_status.json'
 
     # Open a file in write mode and save the JSON data
     with open(filename, 'w') as json_file:
         json.dump(data, json_file, indent=4)
-    
+
     with open(filename, 'r') as jf:
         ld_w = json.load(jf)
 
@@ -98,5 +106,3 @@ if __name__ == '__main__':
     time.sleep(2)
     values = get_device_status()
     print(values)
-    # Adjust the delay as needed
-    time.sleep(1)

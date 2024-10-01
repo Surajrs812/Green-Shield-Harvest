@@ -33,7 +33,7 @@
         <section class="w-full md:w-3/4 p-4 bg-white rounded-lg shadow-lg">
             <h2 class="text-2xl font-semibold mb-4">Live Camera Feed</h2>
             <div class="border rounded-lg overflow-hidden">
-                <img src="http://raspberrypi.local:8080/stream" alt="Raspberry Pi Camera Feed" class="w-full h-64 object-cover">
+                <img src="http://<raspberry_pi_ip>:8080/?action=stream" alt="Raspberry Pi Camera Feed" class="w-full h-64 object-cover">
             </div>
         </section>
 
@@ -83,15 +83,13 @@
                         div.appendChild(row);
                     }
 
-                    // Append the div to the json-output div
+                    // Append the new content to jsonOutput
                     jsonOutput.appendChild(div);
                 } catch (error) {
-                    jsonOutput.innerHTML = '<p class="text-red-500 text-center">Error loading data</p>';
-                    console.error('Error parsing JSON data:', error);
+                    jsonOutput.innerHTML = `<p class="text-red-500">Error parsing JSON data: ${error.message}</p>`;
                 }
             }
         });
     </script>
-
 </body>
 </html>

@@ -1,7 +1,7 @@
 {
     "Status": "ON",
-    "Moisture Sensor 1": "NA",
-    "Moisture Sensor 2": "NA",
-    "Temperature": 29.28,
-    "Humidity": 57
+    "Moisture Sensor 1": "Some Moisture",
+    "Moisture Sensor 2": "No Moisture",
+    "Temperature": 29.63,
+    "Humidity": 55
 }
