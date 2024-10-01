@@ -1,6 +1,7 @@
 pyserial
-time
 requests
-json
 flask
 jinja2
+pandas
+numpy
+google

@@ -73,15 +73,23 @@ def get_device_status():
 
     # Format the final JSON response with sensor statuses and weather data
     data = {
-        "status": "ON",
-        "sensor1_status": sensor1_status,  # Moisture sensor 1 status
-        "sensor2_status": sensor2_status,  # Moisture sensor 2 status
-        "temperature": temperature,  # Temperature from OpenWeather API
-        "humidity": humidity,  # Humidity from OpenWeather API
+        "Status": "ON",
+        "Moisture Sensor 1": sensor1_status,  # Moisture sensor 1 status
+        "Moisture Sensor 2": sensor2_status,  # Moisture sensor 2 status
+        "Temperature": temperature,  # Temperature from OpenWeather API
+        "Humidity": humidity,  # Humidity from OpenWeather API
     }
+    filename = 'device_status.json'
+
+    # Open a file in write mode and save the JSON data
+    with open(filename, 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    with open(filename, 'r') as jf:
+        ld_w = json.load(jf)
 
     # Return the JSON object
-    return json.dumps(data, indent=4)
+    return ld_w
 
 if __name__ == '__main__':
     print("Starting data collection...")

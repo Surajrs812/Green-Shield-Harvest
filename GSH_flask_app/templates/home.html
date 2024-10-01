@@ -4,68 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undergraduate Research Forum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Set font to Roboto */
+        }
+        /* Add a fun background */
+        .background {
+            background: linear-gradient(to right, #f6d55c, #3aafa9); /* Bright and casual gradient */
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans leading-relaxed tracking-wide flex flex-col justify-center items-center">
+<body class="bg-gray-100 leading-relaxed tracking-wide flex flex-col justify-center items-center background">
 
     <!-- Header -->
-    <header class="bg-blue-900 text-white py-6 shadow-lg w-full">
+    <header class="bg-yellow-500 text-white py-6 shadow-lg w-full">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold">RNS Institute of Technology</h1>
-            <h2 class="text-2xl font-medium mt-2">Undergraduate Research Forum</h2>
+            <h1 class="text-5xl font-bold">🌟 RNS Institute of Technology</h1>
+            <h2 class="text-3xl font-medium mt-2">Undergraduate Research Forum 🎉</h2>
         </div>
     </header>
 
     <!-- Main Section -->
     <main class="flex-grow flex flex-col items-center justify-center p-8 text-center">
         <!-- Project Title -->
-        <h2 class="text-6xl text-green-600 font-extrabold mb-4" style="font-family: Consolas;">Green Shield Harvest</h2>
+        <h2 class="text-5xl text-teal-500 font-extrabold mb-4" style="font-family: Consolas;">Green Shield Harvest 🌱</h2>
         
         <!-- Project Description -->
         <p class="text-lg text-gray-800 max-w-2xl text-center mb-6">
-            This project harnesses the power of IoT and Deep Learning to revolutionize hydroponic agriculture. 
-            By automating all tasks typically done by a farmer, this system ensures an efficient and sustainable
-            process, optimizing plant growth and maximizing output. The system also generates a dataset of images 
-            to analyze plant health over time, contributing to the research on smart farming.
+            Get ready to dive into the future of farming! 🚀 This project mixes IoT and Deep Learning 
+            to make hydroponic gardening a breeze. 🌿 With our system, say goodbye to the daily grind 
+            of farming and hello to smart, efficient, and sustainable plant care! Plus, we’re gathering 
+            tons of cool data to help us keep our plants happy and healthy. 📊
         </p>
         
         <!-- Guide Section -->
         <div class="text-center mb-8">
-            <img src="static\Dr_Ambore.jpg" alt="Guide" class="rounded-full mx-auto mb-4 shadow-lg">
-            <p class="text-xl font-bold">Guide:</p>
-            <p class="text-xl font-medium">Bhagyashree Ambore</p>
-            <p class="text-gray-600">Associate Professor, Dept of ISE</p>
+            <img src="static/Dr_Ambore.jpg" alt="Guide" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105"> <!-- Add hover effect -->
+            <p class="text-xl font-bold">Meet Your Guide:</p>
+            <p class="text-xl font-medium">Bhagyashree Ambore 🌟</p>
+            <p class="text-gray-600">Your friendly Associate Professor, Dept of ISE</p>
         </div>
 
         <!-- Students Section -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-center mb-8">
             <div>
-                <img src="https://via.placeholder.com/150" alt="Student 1" class="rounded-full mx-auto mb-4 shadow-lg">
-                <p class="text-xl font-medium">Suraj R S</p>
+                <img src="static/Surajrs.jpg" alt="Student 1" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 cursor-pointer" onclick="alert('Hey there! I’m Suraj R S!');"> <!-- Add interactivity -->
+                <p class="text-xl font-medium">Suraj R S 🎓</p>
                 <p class="text-gray-600">1RN21IS167</p>
             </div>
             <div>
-                <img src="https://via.placeholder.com/150" alt="Student 2" class="rounded-full mx-auto mb-4 shadow-lg">
-                <p class="text-xl font-medium">Srihari M</p>
+                <img src="static/sriharim.jpg" alt="Student 2" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 cursor-pointer" onclick="alert('Hi! I’m Srihari M!');"> <!-- Add interactivity -->
+                <p class="text-xl font-medium">Srihari M 🎓</p>
                 <p class="text-gray-600">1RN21IS152</p>
             </div>
             <div>
-                <img src="https://via.placeholder.com/150" alt="Student 3" class="rounded-full mx-auto mb-4 shadow-lg">
-                <p class="text-xl font-medium">Tejas S</p>
+                <img src="static/tejass.jpg" alt="Student 3" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 cursor-pointer" onclick="alert('Hello! I’m Tejas S!');"> <!-- Add interactivity -->
+                <p class="text-xl font-medium">Tejas S 🎓</p>
                 <p class="text-gray-600">1RN21IS170</p>
             </div>
         </div>
 
         <!-- Call to Action -->
-        <a href="{{ url_for('pi_view') }}" class="text-white bg-green-600 hover:bg-green-700 font-medium py-3 px-6 rounded-lg shadow-lg transition duration-300">
-            Explore Raspberry Pi View
+        <a href="{{ url_for('pi_view') }}" class="text-white bg-teal-500 hover:bg-teal-600 font-medium py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+            Click to Explore Our Digital Farm! 🥕🌽
         </a>
     </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-4 w-full">
         <div class="container mx-auto text-center">
-            <p>&copy; 2024 RNS Institute of Technology. All rights reserved.</p>
+            <p>Dept of ISE, RNS Institute of Technology | Let's grow together! 🌼</p>
         </div>
     </footer>
 
